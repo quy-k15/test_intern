@@ -1,0 +1,84 @@
+#sidebar {
+ width: fit-content;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+}
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #00b894;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 100;
+}
+.ps-sidebar-root {
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.ps-sidebar-container {
+  background-color: transparent !important;
+}
+
+.ps-menu-root {
+  color: #333;
+}
+
+.ps-menuitem-root {
+  margin: 10px 0;
+  font-size: 1.25rem;
+  line-height: 30px;
+}
+
+.ps-menu-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #333;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.ps-menu-button:hover {
+  background-color: #00b894;
+  color: #fff;
+}
+
+.ps-menu-button:hover .ps-menu-icon,
+.ps-menu-button:hover .ps-menu-label {
+  color: #00b894;
+}
+
+.ps-active > .ps-menu-button {
+  background-color: #00b894;
+  color: #fff;
+}
+
+.sidebar-header {
+  height: 130px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.css-1wvake5 {
+  width: 200px !important;
+  min-width: 200px !important;
+}
+.logo_img img {
+  width: 150px;
+  height: 85px;
+}
+
+@media only screen and (max-width: 1024px) {
+  html {
+    overflow: hidden;
+  }
+}

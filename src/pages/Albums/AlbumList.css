@@ -1,0 +1,29 @@
+.albumListDiv{
+    background-color: #f5f5f5;
+    margin-top: 70px;
+    width: 100%;
+}
+.albumList {
+    margin-left: 220px;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.header {
+  height: 50px;
+  background-color: #fff;
+}
+
+.albumListDiv .ant-table-pagination {
+  margin: 0 !important; 
+  padding: 12px 16px; 
+  background-color: #f5f5f5; 
+  display: flex;
+  margin-right: 1rem;
+}
+@media only screen and (max-width: 1024px) {
+  .albumList{
+    margin-left: 1.5rem;
+  }
+}

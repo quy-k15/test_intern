@@ -1,10 +1,9 @@
-// src/pages/Albums/AlbumList.js
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Spin, Typography } from 'antd';
 import { getAlbums, getUsers } from '../../services/api';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import UserAvatar from '../../components/UserAvatar';
-
+import "./AlbumList.css";
 import { FaEye } from "react-icons/fa";
 
 const { Title } = Typography;
@@ -16,7 +15,7 @@ const AlbumList = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
-  const pageSize = 10;
+  const [pageSize, setPageSize] = useState(20); // ✔️ quản lý pageSize bằng state
 
   const navigate = useNavigate();
 
@@ -45,7 +44,7 @@ const AlbumList = () => {
     {
       title: 'Title',
       dataIndex: 'title',
-      width: '40%',
+      width: '50%',
     },
     {
       title: 'User',
@@ -75,31 +74,37 @@ const AlbumList = () => {
     },
   ];
 
+  // ✔️ xử lý phân trang
   const paginatedData = albums.slice((page - 1) * pageSize, page * pageSize);
 
   const handleTableChange = (pagination) => {
-    setSearchParams({ page: pagination.current });
+    setSearchParams({ page: pagination.current }); // giữ page trong URL
+    setPageSize(pagination.pageSize); //
   };
 
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', padding: 24 }}>
-      <Title level={3}>Album List</Title>
-      {loading ? (
-        <Spin size="large" />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={paginatedData}
-          rowKey="id"
-          pagination={{
-            current: page,
-            pageSize,
-            total: albums.length,
-          }}
-          onChange={handleTableChange}
-        />
-      )}
+    <div className="albumListDiv">
+      <div className="albumList">
+        {loading ? (
+          <Spin size="large" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={paginatedData}
+            rowKey="id"
+            pagination={{
+              current: page,
+              pageSize,
+              total: albums.length,
+              showSizeChanger: true, 
+              pageSizeOptions: ['10', '20', '50', '100'], 
+            }}
+            onChange={handleTableChange}
+          />
+        )}
+      </div>
     </div>
+    
   );
 };
 
