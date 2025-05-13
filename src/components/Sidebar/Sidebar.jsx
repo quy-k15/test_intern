@@ -26,7 +26,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 720;
+      const mobile = window.innerWidth <= 1024;
       setIsMobile(mobile);
       setVisible(!mobile); // nếu mobile thì ẩn sidebar
     };
@@ -44,37 +44,41 @@ const Sidebar = () => {
       )}
 
       {visible && (
-        <div id="sidebar">
-          <ProSidebar>
-            <Menu iconShape="square">
-              <MenuItem
-                style={{ textAlign: "center" }}
-                className="sidebar-header"
-                component={<Link to={sidebarNav[0].path}></Link>}
-              >
-                <div className="logo_img">
-                  <img src={logo} alt="logo.png" />
-                </div>
-              </MenuItem>
+        <div className="sidebarDiv">
+          <div id="sidebar">
+            <ProSidebar>
+              <Menu iconShape="square">
+                <MenuItem
+                  style={{ textAlign: "center" }}
+                  className="sidebar-header"
+                  component={<Link to={sidebarNav[0].path}></Link>}
+                >
+                  <div className="logo_img">
+                    <img src={logo} alt="logo.png" />
+                  </div>
+                </MenuItem>
 
-              <MenuItem
-                active={pathname.startsWith("/albums")}
-                icon={<FaRegListAlt />}
-                component={<Link to={sidebarNav[0].path} />}
-              >
-                Albums
-              </MenuItem>
+                <MenuItem
+                  active={pathname.startsWith("/albums")}
+                  icon={<FaRegListAlt />}
+                  component={<Link to={sidebarNav[0].path} />}
+                >
+                  Albums
+                </MenuItem>
 
-              <MenuItem
-                active={pathname.startsWith("/users")}
-                icon={<HiOutlineIdentification />}
-                component={<Link to={sidebarNav[1].path} />}
-              >
-                Users
-              </MenuItem>
-            </Menu>
-          </ProSidebar>
+                <MenuItem
+                  active={pathname.startsWith("/users")}
+                  icon={<HiOutlineIdentification />}
+                  component={<Link to={sidebarNav[1].path} />}
+                >
+                  Users
+                </MenuItem>
+              </Menu>
+            </ProSidebar>
+          </div>
+          {isMobile && <div className="sidebarRight" onClick={toggleSidebar}></div>}
         </div>
+        
       )}
     </>
   );

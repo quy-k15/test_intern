@@ -88,3 +88,14 @@
 .user-card{
     border: none;
 }
+@media only screen and (max-width: 1024px) {
+  .albumBack{
+    margin-left: 1.5rem;
+  }
+  .albumLink{
+    margin-left: 1.5rem;
+  }
+  .albumDetail{
+     margin-left: 1.5rem;
+  }
+}

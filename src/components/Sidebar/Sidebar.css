@@ -1,3 +1,20 @@
+.sidebarDiv {
+  position: unset; /* reset nếu không phải mobile hoặc sidebar đóng */
+}
+#sidebar {
+  width: fit-content;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 10000;
+}
+
+.sidebarRight {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.3); /* lớp mờ */
+  height: 100vh;
+  cursor: pointer;
+}
+
 #sidebar {
  width: fit-content;
   position: fixed;
@@ -78,7 +95,16 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  html {
-    overflow: hidden;
+  .sidebarDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    pointer-events: auto;
+  }
+  .sidebarRight{
+    width: 100vw;
   }
 }
