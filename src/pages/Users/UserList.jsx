@@ -1,39 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Spin, Typography } from "antd";
-import { getAlbums, getUsers } from "../../services/api";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { getUsers } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 import UserAvatar from "../../components/UserAvatar";
 import "../Albums/AlbumList.css";
 import { FaEye } from "react-icons/fa";
 
-const { Title } = Typography;
-
 const UserList = () => {
-  const [albums, setAlbums] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const [pageSize, setPageSize] = useState(20); // ✔️ quản lý pageSize bằng state
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const [albumRes, userRes] = await Promise.all([getAlbums(), getUsers()]);
-      setAlbums(albumRes.data);
+      const userRes = await getUsers();
       setUsers(userRes.data);
       setLoading(false);
     };
     fetchData();
   }, []);
-
-  const userMap = {};
-  users.forEach((user) => {
-    userMap[user.id] = user;
-  });
 
   const columns = [
     {
@@ -42,70 +29,49 @@ const UserList = () => {
       width: "7%",
     },
     {
-      title: "Avatar",
-      dataIndex: "userId",
-      render: (userId) => {
-        const user = userMap[userId];
-        if (!user) return null;
-        return <UserAvatar name={user.name} />;
-      },
+   title: "Avatar",
+      dataIndex: "name",
+      render: (name) => <UserAvatar name={name} />,
       width: "7%",
     },
     {
       title: "Name",
-      dataIndex: "userId",
-      render: (userId) => {
-        const user = userMap[userId];
-        if (!user) return null;
-        return <span>{user.name}</span>;
-      },
+      dataIndex: "name",
       width: "20%",
     },
     {
-      title: "Email",
-      dataIndex: "userId",
-      render: (userId) => {
-        const email = userMap[userId].email;
-        if (!email) return null;
-        return (
-          <a href={`mailto:${email}`} className="user-link">
-            {email}
-          </a>
-        );
-      },
+     title: "Email",
+      dataIndex: "email",
+      render: (email) => (
+        <a href={`mailto:${email}`} className="user-link">
+          {email}
+        </a>
+      ),
       width: "20%",
     },
     {
       title: "Phone",
-      dataIndex: "userId",
-      render: (userId) => {
-        const phone = userMap[userId].phone;
-        if (!phone) return null;
-       return (
-          <a href={`tel:${phone}`} className="user-link">
-            {phone}
-          </a>
-        );
-      },
+      dataIndex: "phone",
+      render: (phone) => (
+        <a href={`tel:${phone}`} className="user-link">
+          {phone}
+        </a>
+      ),
       width: "20%",
     },
     {
       title: "Website",
-      dataIndex: "userId",
-      render: (userId) => {
-        const website  = userMap[userId].website;
-        if (!website) return null;
-        return (
-          <a
-            href={`http://${website}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="user-link"
-          >
-            {website}
-          </a>
-        );
-      },
+      dataIndex: "website",
+      render: (website) => (
+        <a
+          href={`http://${website}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="user-link"
+        >
+          {website}
+        </a>
+      ),
       width: "13%",
     },
     {
@@ -119,14 +85,6 @@ const UserList = () => {
     },
   ];
 
-  // ✔️ xử lý phân trang
-  const paginatedData = albums.slice((page - 1) * pageSize, page * pageSize);
-
-  const handleTableChange = (pagination) => {
-    setSearchParams({ page: pagination.current }); // giữ page trong URL
-    setPageSize(pagination.pageSize); //
-  };
-
   return (
     <div className="albumListDiv">
       <h2>Users</h2>
@@ -134,18 +92,11 @@ const UserList = () => {
         {loading ? (
           <Spin size="large" />
         ) : (
-          <Table
+         <Table
             columns={columns}
-            dataSource={paginatedData}
+            dataSource={users}
             rowKey="id"
-            pagination={{
-              current: page,
-              pageSize,
-              total: albums.length,
-              showSizeChanger: true,
-              pageSizeOptions: ["10", "20", "50", "100"],
-            }}
-            onChange={handleTableChange}
+            pagination={false}
           />
         )}
       </div>
