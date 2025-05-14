@@ -26,11 +26,81 @@
   margin-left: 220px;
   font-weight: 600;
 }
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-responsive .ant-table {
+  min-width: 700px; 
+}
+
 @media only screen and (max-width: 1024px) {
   .albumList {
     margin-left: 1.5rem;
   }
   .albumListDiv h2 {
     margin-left: 1.5rem;
+  }
+}
+/* Media Query cho màn hình dưới 820px */
+@media only screen and (max-width: 820px) {
+  .albumList {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .albumListDiv h2 {
+    font-size: 20px; /* Giảm kích thước chữ của tiêu đề */
+    margin-left: 0;
+  }
+
+  .ant-table {
+    font-size: 12px; /* Giảm font chữ trong bảng */
+  }
+
+  .albumListDiv .ant-table-pagination {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  /* Điều chỉnh bảng trên màn hình nhỏ hơn */
+  .albumList {
+    margin-left: 0; /* Không có khoảng cách bên trái */
+    margin-right: 0; /* Không có khoảng cách bên phải */
+    padding: 0;
+  }
+}
+
+/* Responsive cho màn hình rất nhỏ (như mobile dưới 480px) */
+@media only screen and (max-width: 480px) {
+  .albumList {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .albumListDiv h2 {
+    font-size: 18px;
+    margin-left: 0;
+  }
+
+  .ant-table {
+    font-size: 12px;
+  }
+
+  .albumListDiv .ant-table-pagination {
+    padding: 8px 16px;
+  }
+}
+
+
+@media only screen and (max-width: 480px) {
+  .table-responsive .ant-table {
+    font-size: 11px;
+  }
+
+  .table-responsive .ant-btn {
+    font-size: 11px;
+    padding: 4px 6px;
   }
 }

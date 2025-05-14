@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Card, Avatar, Typography, Spin, Row, Col, Pagination } from "antd";
 import {
   getAlbumById,
@@ -9,6 +9,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { FaRegListAlt } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
+import UserAvatar from "../../components/UserAvatar";
 import "./AlbumDetail.css";
 
 const { Title, Text } = Typography;
@@ -66,17 +67,22 @@ const AlbumDetail = () => {
       </div>
       <div className="albumDetail">
         <div className="DetailContent">
-          <Card className="user-card">
-            <Card.Meta
-              avatar={<Avatar size={40}>{user.name.charAt(0)}</Avatar>}
-              title={<span>{user.name}</span>}
-              description={
-                <a href={`mailto:${user.email}`} className="user-link">
-                  {user.email}
-                </a>
-              }
-            />
-          </Card>
+          <div className="userCard">
+            <UserAvatar name={user.name} />
+            <div className="userInfo">
+              {user?.id && (
+                <span
+                  className="userName"
+                  onClick={() => navigate(`/users/${user.id}`)}
+                >
+                  {user.name}
+                </span>
+              )}
+              <a href={`mailto:${user.email}`} className="user-link">
+                {user.email}
+              </a>
+            </div>
+          </div>
           <hr></hr>
           <Typography.Title level={4}>{album.title}</Typography.Title>
 

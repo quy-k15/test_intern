@@ -29,7 +29,7 @@ const UserList = () => {
       width: "7%",
     },
     {
-   title: "Avatar",
+      title: "Avatar",
       dataIndex: "name",
       render: (name) => <UserAvatar name={name} />,
       width: "7%",
@@ -40,7 +40,7 @@ const UserList = () => {
       width: "20%",
     },
     {
-     title: "Email",
+      title: "Email",
       dataIndex: "email",
       render: (email) => (
         <a href={`mailto:${email}`} className="user-link">
@@ -92,12 +92,14 @@ const UserList = () => {
         {loading ? (
           <Spin size="large" />
         ) : (
-         <Table
-            columns={columns}
-            dataSource={users}
-            rowKey="id"
-            pagination={false}
-          />
+          <div className="table-responsive">
+            <Table
+              columns={columns}
+              dataSource={users}
+              rowKey="id"
+              pagination={false}
+            />
+          </div>
         )}
       </div>
     </div>

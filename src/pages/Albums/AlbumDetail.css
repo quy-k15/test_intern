@@ -97,6 +97,30 @@
 .ant-card .ant-card-body {
   padding: 0 !important;
 }
+.userCard{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.userInfo {
+  display: grid;
+  margin-left: 1rem;
+}
+
+.userName {
+  font-weight: bold;
+  font-size: 18px;
+}
+.userText{
+  font-weight: bold;
+  font-size: 18px;
+}
+.userName:hover{
+  color: #00b894;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1024px) {
   .albumBack {
     margin-left: 1.5rem;

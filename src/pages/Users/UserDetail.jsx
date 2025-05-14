@@ -5,6 +5,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaRegListAlt } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
+import UserAvatar from "../../components/UserAvatar";
 import "../Albums/AlbumDetail.css";
 
 const { Title } = Typography;
@@ -24,7 +25,7 @@ const UserDetail = () => {
         const userRes = await getUserById(userId);
         const albumsRes = await getAlbums();
         const userAlbums = albumsRes.data.filter(
-          (album) => album.userId === parseInt(userId)// Lọc ra những albums của user cần hiển thịthị
+          (album) => album.userId === parseInt(userId) // Lọc ra những albums của user cần hiển thịthị
         );
 
         setUser(userRes.data);
@@ -62,7 +63,9 @@ const UserDetail = () => {
   ];
 
   if (loading || !user) {
-    return <Spin size="large" style={{ display: "block", margin: "100px auto" }} />;
+    return (
+      <Spin size="large" style={{ display: "block", margin: "100px auto" }} />
+    );
   }
 
   return (
@@ -84,17 +87,15 @@ const UserDetail = () => {
 
       <div className="albumDetail">
         <div className="DetailContent">
-          <Card className="user-card">
-            <Card.Meta
-              avatar={<Avatar size={40}>{user.name.charAt(0)}</Avatar>}
-              title={user.name}
-              description={
-                <a href={`mailto:${user.email}`} className="user-link">
-                  {user.email}
-                </a>
-              }
-            />
-          </Card>
+          <div className="userCard">
+            <UserAvatar name={user.name} />
+            <div className="userInfo">
+              <span className="userText">{user.name}</span>
+              <a href={`mailto:${user.email}`} className="user-link">
+                {user.email}
+              </a>
+            </div>
+          </div>
 
           <hr />
 
